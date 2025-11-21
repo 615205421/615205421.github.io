@@ -1,1 +1,1 @@
-https://615205421.github.io/
+https://615205421.com
