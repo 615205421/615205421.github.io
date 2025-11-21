@@ -3,1037 +3,1155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>世纪白昼的极简机</title>
+    <title>UCC国际洗衣 - 专业干洗与缝补服务</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --primary-bg: #e0e5ec;
+            --shadow-light: #ffffff;
+            --shadow-dark: #a3b1c6;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --accent: #2d3748;
+            --card-bg: #e0e5ec;
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #ffffff;
-            color: #000000;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
             line-height: 1.6;
+            min-height: 100vh;
         }
         
         .container {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: #ffffff;
-            border: 1px solid #f0f0f0;
+            padding: 0 20px;
         }
         
-        .header {
-            background-color: #ffffff;
-            color: #000000;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid #f0f0f0;
+        /* 拟态阴影效果 */
+        .neumorphism {
+            background: var(--primary-bg);
+            box-shadow: 10px 10px 20px var(--shadow-dark), 
+                        -10px -10px 20px var(--shadow-light);
+            border-radius: 20px;
         }
         
-        .header h1 {
-            font-size: 1.5rem;
-            font-weight: 400;
+        .neumorphism-inset {
+            background: var(--primary-bg);
+            box-shadow: inset 5px 5px 10px var(--shadow-dark), 
+                        inset -5px -5px 10px var(--shadow-light);
+            border-radius: 20px;
         }
         
-        .content {
-            flex: 1;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+        .neumorphism-pressed {
+            background: var(--primary-bg);
+            box-shadow: inset 5px 5px 10px var(--shadow-dark), 
+                        inset -5px -5px 10px var(--shadow-light);
+            border-radius: 20px;
         }
         
-        .page {
-            display: none;
-            flex: 1;
-            flex-direction: column;
-            height: 100%;
-            overflow: hidden;
+        header {
+            padding: 30px 0;
+            background: var(--primary-bg);
         }
         
-        .page.active {
-            display: flex;
-        }
-        
-        .footer {
-            display: flex;
-            background-color: #ffffff;
-            border-top: 1px solid #f0f0f0;
-        }            
-        
-        .tab {
-            flex: 1;
-            text-align: center;
-            padding: 16px 0;
-            color: #666666;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-            border-bottom: 2px solid transparent;
-        }
-        
-        .tab.active {
-            color: #000000;
-            border-bottom-color: #000000;
-        }
-        
-        .tab:hover {
-            color: #000000;
-            background-color: #fafafa;
-        }
-        
-        /* 聊天页面样式 */
-        .chat-container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        
-        .chat-header {
-            padding: 16px 20px;
-            border-bottom: 1px solid #f0f0f0;
+        .header-content {    
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #ffffff;
-        }       
+            padding: 20px 30px;
+            border-radius: 25px;
+            background: var(--primary-bg);
+            box-shadow: 10px 10px 20px var(--shadow-dark), 
+                        -10px -10px 20px var(--shadow-light);
+        }
         
-        .chat-header h2 {
-            font-size: 1.1rem;
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            margin-right: 20px;
+            background: var(--primary-bg);
+            box-shadow: 8px 8px 16px var(--shadow-dark), 
+                        -8px -8px 16px var(--shadow-light);
+            color: var(--accent);
+        }      
+
+        .logo-text h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+        
+        .logo-text p {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+        
+        .contact-header {
+            text-align: right;
+        }
+        
+        .phone {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--accent);
+        }
+        
+        .contact-header p {
+            color: var(--text-secondary);
+        }
+        
+        nav {
+            margin-top: 30px;
+            padding: 15px 30px;
+            border-radius: 20px;        
+            background: var(--primary-bg);
+            box-shadow: 8px 8px 16px var(--shadow-dark), 
+                        -8px -8px 16px var(--shadow-light);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+        }
+        
+        .nav-links li {
+            margin: 0 15px;
+        }
+        
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 12px 20px;
+            display: inline-block;
+            transition: all 0.3s;
             font-weight: 500;
+            border-radius: 15px;
+            background: var(--primary-bg);
+            box-shadow: 5px 5px 10px var(--shadow-dark), 
+                        -5px -5px 10px var(--shadow-light);
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            box-shadow: inset 5px 5px 10px var(--shadow-dark), 
+                        inset -5px -5px 10px var(--shadow-light);
+            color: var(--accent);    
+        }
+        
+        .hero {
+            height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin: 40px 0;
+            border-radius: 30px;
+            overflow: hidden;
+            background: var(--primary-bg);
+            box-shadow: 15px 15px 30px var(--shadow-dark), 
+                        -15px -15px 30px var(--shadow-light);
+        }
+        
+        .hero-content {
+            padding: 0 50px;
+            max-width: 700px;
+        }
+        
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }    
+     
+        .btn {
+            display: inline-block;
+            background: var(--primary-bg);
+            color: var(--accent);
+            padding: 15px 30px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 8px 8px 16px var(--shadow-dark), 
+                        -8px -8px 16px var(--shadow-light);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            box-shadow: inset 5px 5px 10px var(--shadow-dark), 
+                        inset -5px -5px 10px var(--shadow-light);
+            transform: translateY(2px);
+        }
+        
+        .btn:active {
+            box-shadow: inset 5px 5px 10px var(--shadow-dark), 
+                        inset -5px -5px 10px var(--shadow-light);
+            transform: translateY(4px);
+        }
+        
+        section {
+            padding: 80px 0;
+        }    
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--accent);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            padding: 0 20px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 25px auto 0;
+            font-size: 18px;
+            line-height: 1.7;   
+        }
+        
+        .price-tables-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .price-table-wrapper {
+            flex: 1;
+            min-width: 320px;
+            border-radius: 25px;
+            overflow: hidden;
+            background: var(--primary-bg);
+            box-shadow: 12px 12px 24px var(--shadow-dark), 
+                        -12px -12px 24px var(--shadow-light);
+        }
+        
+        .price-table-title {
+            background: var(--accent);
+            color: white;
+            padding: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 25px 25px 0 0;
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;    
+        }
+        
+        .price-table th {
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            padding: 18px 20px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--shadow-light);
+            font-size: 16px;
+        }
+        
+        .price-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(163, 177, 198, 0.3);
+        }
+        
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .price-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .price {
+            color: var(--accent);
+            font-weight: bold;
+            text-align: right;
+            white-space: nowrap;
+        }    
+        
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .service-card {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            padding: 40px 30px;
+            border-radius: 25px;
+            text-align: center;
+            transition: all 0.4s;
+            background: var(--primary-bg);
+            box-shadow: 10px 10px 20px var(--shadow-dark), 
+                        -10px -10px 20px var(--shadow-light);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 15px 15px 30px var(--shadow-dark), 
+                        -15px -15px 30px var(--shadow-light);
+        }
+        
+        .service-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            background: var(--primary-bg);
+            box-shadow: 8px 8px 16px var(--shadow-dark), 
+                        -8px -8px 16px var(--shadow-light);
+            color: var(--accent);
+        }
+        
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--accent);
+            font-size: 22px;
+        }
+        
+        .service-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* 聊天界面样式 */
+        .chat-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 380px;
+            height: 550px;
+            border-radius: 25px;
+            display: flex;  
+            flex-direction: column;
+            z-index: 1000;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: var(--primary-bg);
+            box-shadow: 15px 15px 30px var(--shadow-dark), 
+                        -15px -15px 30px var(--shadow-light);
+        }
+        
+        .chat-header {
+            background: var(--accent);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .chat-close {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            display: flex;      
+            align-items: center;
+            justify-content: center;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2), 
+                        -3px -3px 6px rgba(255, 255, 255, 0.1);
+        }
+        
+        .chat-close:active {
+            box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2), 
+                        inset -2px -2px 4px rgba(255, 255, 255, 0.1);
         }
         
         .chat-messages {
             flex: 1;
-            overflow-y: auto;
             padding: 20px;
-            background: #ffffff;
-        }  
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
         
         .message {
-            margin-bottom: 16px;
-            padding: 12px 16px;
-            border-radius: 18px;
-            max-width: 70%;
-            position: relative;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            border: 1px solid #f0f0f0;
-            background: #ffffff;
-            transition: all 0.2s;
-        }        
-        
-        .user-message {
-            margin-left: auto;
-            border-bottom-right-radius: 6px;
+            max-width: 80%;
+            padding: 12px 18px;
+            margin-bottom: 15px;
+            border-radius: 20px;
+            line-height: 1.5;
+            box-shadow: 5px 5px 10px var(--shadow-dark), 
+                        -5px -5px 10px var(--shadow-light);
         }
         
         .bot-message {
-            margin-right: auto;
-            border-bottom-left-radius: 6px;
-        }
+            align-self: flex-start;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            border-radius: 20px 20px 20px 5px;
+        }   
         
-        .message:hover .message-actions {
-            opacity: 1;
-        }
-        
-        .message-actions {
-            position: absolute;
-            top: -10px;
-            right: 10px;
-            display: flex;
-            gap: 5px;
-            opacity: 0;
-            transition: opacity 0.2s;
-            background: white;
-            padding: 4px;
-            border-radius: 4px;
-            border: 1px solid #f0f0f0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .message-action {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 0.8rem;
-            padding: 4px 8px;
-            border-radius: 3px;
-            color: #666;
-        }
-        
-        .message-action:hover {
-            background: #f5f5f5;
-            color: #000;
-        }
-        
-        .edit-message-input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #f0f0f0;
-            border-radius: 4px;
-            font-size: 0.95rem;
-            resize: vertical;
-            min-height: 60px;
-        }
-        
-        .edit-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 8px;
-            margin-top: 8px;
-        }
-        
-        .chat-input-container {
-            padding: 16px 20px;
-            border-top: 1px solid #f0f0f0;
-            background: #ffffff;
+        .user-message {
+            align-self: flex-end;
+            background: var(--accent);
+            color: white;
+            border-radius: 20px 20px 5px 20px;
         }
         
         .chat-input {
             display: flex;
-            gap: 12px;
-            align-items: flex-end;
-        }          
+            padding: 20px;
+            border-top: 1px solid rgba(163, 177, 198, 0.3);
+        }
         
-        .chat-input textarea {
+        .chat-input input {
             flex: 1;
-            padding: 12px 16px;
-            border: 1px solid #f0f0f0;
-            border-radius: 24px;
-            resize: none;
-            font-size: 0.95rem;
-            background: #ffffff;
-            min-height: 44px;
-            max-height: 120px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            background: var(--primary-bg);
+            box-shadow: inset 5px 5px 10px var(--shadow-dark), 
+                        inset -5px -5px 10px var(--shadow-light);
+            color: var(--text-primary);
+            font-size: 16px;
+        }
+        
+        .chat-input input::placeholder {
+            color: var(--text-secondary);
         }
         
         .chat-input button {
-            padding: 12px 24px;
-            background: #000000;
-            color: #ffffff;
+            background: var(--accent);
+            color: white;    
             border: none;
-            border-radius: 24px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            transition: background 0.2s;
-        }
-        
-        .chat-input button:hover {
-            background: #333333;
-        }
-        
-        /* API配置页面样式 */
-        .api-container {
-            padding: 20px;
-            overflow-y: auto;
-            height: 100%;
-        }
-        
-        .api-form {
-            background: #ffffff;
-        }
-        
-        .api-form h2 {
-            margin-bottom: 24px;
-            font-weight: 500;
-            font-size: 1.3rem;
-        }           
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #000000;
-        }    
-        
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #f0f0f0;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            background: #ffffff;
-        }
-        
-        .form-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: 24px;
-        }
-        
-        .btn {      
-            padding: 10px 20px;
-            border: 1px solid #f0f0f0;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-            background: #ffffff;
-            color: #000000;
-        }
-        
-        .btn-primary {
-            background: #000000;
-            color: #ffffff;
-            border-color: #000000;
-        }          
-
-        .btn-secondary {
-            background: #f8f8f8;
-            color: #000000;
-        }
-        
-        .btn:hover {
-            opacity: 0.9;
-        }
-        
-        /* 角色管理页面样式 */
-        .roles-container {
-            padding: 20px;
-            overflow-y: auto;
-            height: 100%;
-        }                                                                                   
-        
-        .roles-container h2 {
-            margin-bottom: 20px;
-            font-weight: 500;
-            font-size: 1.3rem;
-        }
-        
-        .role-list {
-            margin-bottom: 20px;
-        }
-        
-        .role-card {
-            background: #ffffff;
-            padding: 16px;
-            margin-bottom: 12px;
-            border: 1px solid #f0f0f0;
-            border-radius: 8px;
-        }
-        
-        .role-card h3 {
-            margin-bottom: 8px;
-            font-weight: 500;
-        }       
-        
-        .role-card p {
-            color: #666666;
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-        }
-        
-        .role-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 8px;
-        }       
-         
-        /* 加载动画 */
-        .loading-dots {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
             border-radius: 50%;
-            background-color: #cccccc;
-            animation: loadingAnimation 1.4s infinite ease-in-out;
-            margin: 0 2px;
+            width: 50px;
+            height: 50px;
+            margin-left: 15px;
+            cursor: pointer;
+            box-shadow: 5px 5px 10px var(--shadow-dark), 
+                        -5px -5px 10px var(--shadow-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
         }
         
-        .loading-dots:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .loading-dots:nth-child(3) {
-            animation-delay: 0.4s;
+        .chat-input button:active {
+            box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.2), 
+                        inset -3px -3px 6px rgba(255, 255, 255, 0.1);
         }
         
-        @keyframes loadingAnimation {
-            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
-            40% { transform: scale(1); opacity: 1; }
+        .chat-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;     
+            box-shadow: 8px 8px 16px var(--shadow-dark), 
+                        -8px -8px 16px var(--shadow-light);
+            transition: all 0.3s;
         }
         
-        /* 提示信息 */
-        .alert {
-            padding: 12px 16px;
-            margin-bottom: 16px;
-            border-radius: 8px;
-            border: 1px solid #f0f0f0;
+        .chat-toggle:hover {
+            transform: scale(1.05);
         }
         
-        .alert-success {
-            background: #f0f9f0;
-            color: #0a6c0a;
-        }
-
-        .alert-error {
-            background: #fdf0f0;
-            color: #c53030;
+        .chat-toggle:active {
+            box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.2), 
+                        inset -5px -5px 10px rgba(255, 255, 255, 0.1);
         }
         
-        /* 响应式调整 */
+        .chat-hidden {
+            transform: translateY(150%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .contact-info {
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 30px;
+            margin: 40px 0;
+            background: var(--primary-bg);
+            box-shadow: 15px 15px 30px var(--shadow-dark), 
+                        -15px -15px 30px var(--shadow-light);
+        }
+        
+        .contact-info h2 {
+            margin-bottom: 20px;
+            color: var(--accent);   
+            font-size: 36px;
+        }
+        
+        .contact-details {
+            font-size: 22px;
+            margin-bottom: 40px;
+            color: var(--text-secondary);
+        }
+        
+        .contact-details strong {
+            color: var(--accent);
+        }
+        
+        footer {
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 30px;
+            border-radius: 25px;
+            background: var(--primary-bg);
+            box-shadow: 10px 10px 20px var(--shadow-dark), 
+                        -10px -10px 20px var(--shadow-light);
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            display: flex;   
+            align-items: center;
+        }
+        
+        .footer-logo .logo-icon {
+            width: 60px;
+            height: 60px;
+            font-size: 18px;
+            margin-right: 15px;
+        }
+        
+        .footer-logo-text h3 {
+            font-size: 24px;
+            color: var(--accent);
+        }
+        
+        .footer-logo-text p {
+            color: var(--text-secondary);
+        }
+        
+        .footer-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            background: var(--primary-bg);
+            box-shadow: 5px 5px 10px var(--shadow-dark), 
+                        -5px -5px 10px var(--shadow-light);
+            transition: all 0.3s;
+        }      
+        
+        .footer-links a:hover {
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), 
+                        inset -3px -3px 6px var(--shadow-light);
+        }
+        
+        .copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(163, 177, 198, 0.5);
+            width: 100%;
+            color: var(--text-secondary);
+        }
+        
         @media (max-width: 768px) {
-            .container {
-                height: 100vh;
-                max-width: 100%;
-            }             
-            
-            .message {
-                max-width: 85%;
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
             }
             
-            .tab {
-                padding: 14px 0;
-                font-size: 0.85rem;
+            .logo {
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+            
+            .contact-header {
+                text-align: center;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                text-align: center;
+            }   
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .price-tables-container {
+                flex-direction: column;
+            }
+            
+            .chat-container {
+                width: 90%;
+                right: 5%;
+                height: 70%;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-logo {
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+            
+            .footer-links {
+                margin-top: 20px;
+            }
+            
+            .footer-links a {
+                margin: 5px 10px;   
+                display: inline-block;
+            }
+            
+            .hero h2 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>世纪白昼的极简机</h1>
-        </div>
-        
-        <div class="content">
-            <!-- 聊天页面 -->
-            <div id="chat-page" class="page active">
-                <div class="chat-container">
-                    <div class="chat-header">
-                        <h2 id="current-role">未选择角色</h2>
-                        <button id="add-role-btn" class="btn btn-primary">添加角色</button>
-                    </div>
-                    <div class="chat-messages" id="chat-messages">
-                        <!-- 消息将在这里动态添加 -->
-                    </div>
-                    <div class="chat-input-container">
-                        <div class="chat-input">
-                            <textarea id="user-input" placeholder="输入消息..."></textarea>
-                            <button id="send-btn">发送</button>
-                        </div>
+    <header>
+        <div class="container">
+            <div class="header-content neumorphism">
+                <div class="logo">
+                    <div class="logo-icon neumorphism">UCC</div>
+                    <div class="logo-text">
+                        <h1>UCC国际洗衣</h1>
+                        <p>Since 1945 · 专业干洗与缝补服务</p>
                     </div>
                 </div>
-            </div>  
-            
-            <!-- API配置页面 -->
-            <div id="api-page" class="page">
-                <div class="api-container">
-                    <div class="api-form">
-                        <h2>API配置</h2>
-                        <div id="api-alert" class="alert" style="display: none;"></div>
-                        <div class="form-group">
-                            <label for="api-provider">API提供商</label>
-                            <select id="api-provider">
-                                <option value="openai">OpenAI</option>
-                                <option value="custom">自定义</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="api-key">API密钥</label>
-                            <input type="password" id="api-key" placeholder="请输入API密钥">
-                        </div>
-                        <div class="form-group">
-                            <label for="api-url">API地址</label>
-                            <input type="text" id="api-url" placeholder="https://api.openai.com/v1">
-                        </div>   
-                        <div class="form-group">
-                            <label for="model-select">模型选择</label>
-                            <div style="display: flex; gap: 12px; align-items: center;">
-                                <select id="model-select" style="flex: 1;">
-                                    <option value="">请先获取模型列表</option>
-                                </select>
-                                <button id="refresh-models" class="btn btn-secondary">刷新模型</button>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <button id="test-api" class="btn btn-secondary">测试连接</button>
-                            <button id="save-api" class="btn btn-primary">保存配置</button>
-                        </div>
-                    </div>
-                </div>
-            </div>    
-            
-            <!-- 角色管理页面 -->
-            <div id="roles-page" class="page">
-                <div class="roles-container">
-                    <h2>角色管理</h2>
-                    <div class="role-list" id="role-list">
-                        <!-- 角色卡片将在这里动态添加 -->
-                    </div>
-                    <button id="new-role-btn" class="btn btn-primary">新建角色</button>
-                    
-                    <!-- 角色编辑表单 (初始隐藏) -->
-                    <div id="role-form" style="display: none; margin-top: 24px;">
-                        <h3 id="form-title" style="margin-bottom: 16px;">新建角色</h3>
-                        <div class="form-group">
-                            <label for="role-name">角色名称</label>
-                            <input type="text" id="role-name" placeholder="请输入角色名称">
-                        </div>    
-                        <div class="form-group">
-                            <label for="role-description">角色描述</label>
-                            <textarea id="role-description" placeholder="请输入角色描述" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="role-prompt">角色提示词</label>
-                            <textarea id="role-prompt" placeholder="请输入角色提示词（用于指导AI如何扮演这个角色）" rows="4"></textarea>
-                        </div>
-                        <div class="form-actions">
-                            <button id="cancel-role" class="btn btn-secondary">取消</button>
-                            <button id="save-role" class="btn btn-primary">保存</button>
-                        </div>                                                              
-                    </div>
+                <div class="contact-header">
+                    <div class="phone">15821167656</div>
+                    <p>营业时间: 周一至周日 8:00-20:00</p>
                 </div>
             </div>
         </div>
-        
-        <div class="footer">
-            <div class="tab active" data-page="chat-page">聊天</div>
-            <div class="tab" data-page="api-page">API配置</div>
-            <div class="tab" data-page="roles-page">角色管理</div>
+    </header>    
+    
+    <div class="container">
+        <nav class="neumorphism">
+            <ul class="nav-links">
+                <li><a href="#home" class="active">首页</a></li>
+                <li><a href="#services">服务项目</a></li>
+                <li><a href="#laundry-prices">干洗价格</a></li>
+                <li><a href="#repair-prices">缝补价格</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2>UCC国际洗衣 · 专业干洗与缝补服务</h2>
+                <p>源自1945年的专业技术，为您提供一站式洗衣和缝补解决方案。我们采用最先进的设备和环保清洗剂，确保您的衣物得到最好的呵护。</p>
+                <a href="#laundry-prices" class="btn">查看服务价格</a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>我们的服务</h2>
+                <p>UCC国际洗衣提供全方位的专业洗衣和缝补服务，满足您的各种需求。我们采用环保清洗剂，确保衣物洁净的同时保护环境。</p>
+            </div>
+            
+            <div class="services">   
+                <div class="service-card">
+                    <div class="service-icon">👔</div>
+                    <h3>西装礼服清洗</h3>
+                    <p>专业西装礼服护理，保持版型挺括，延长使用寿命。采用特殊工艺，确保不缩水不变形。</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🧥</div>
+                    <h3>外套大衣护理</h3>
+                    <p>风衣、棉服、羽绒服专业清洗，恢复蓬松柔软。特殊面料专业处理，确保不损伤衣物。</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🪡</div>
+                    <h3>专业缝补服务</h3>
+                    <p>剪裤边、换拉链、改尺寸等全方位缝补服务。经验丰富的裁缝师傅，手工精细。</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">👟</div>
+                    <h3>鞋类护理</h3>
+                    <p>运动鞋、皮鞋专业清洗保养，让鞋子焕然一新。采用专业鞋类护理产品，延长鞋子寿命。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="laundry-prices">
+        <div class="container">     
+            <div class="section-title">
+                <h2>干洗服务价格表</h2>
+                <p>专业干洗服务，让您的衣物焕然一新。所有价格已包含熨烫和包装服务。</p>
+            </div>
+            
+            <div class="price-tables-container">
+                <div class="price-table-wrapper">
+                    <div class="price-table-title">服装清洗</div>
+                    <table class="price-table">
+                        <tr>
+                            <th>服务项目</th>
+                            <th class="price">价格(元)</th>
+                        </tr>
+                        <tr>
+                            <td>西装</td>
+                            <td class="price">30</td>
+                        </tr>
+                        <tr>
+                            <td>休闲外套</td>
+                            <td class="price">30</td>
+                        </tr>
+                        <tr>
+                            <td>衬衫/T恤/裤子</td>
+                            <td class="price">10</td>
+                        </tr>
+                        <tr>
+                            <td>风衣</td>
+                            <td class="price">30</td>
+                        </tr>
+                        <tr>
+                            <td>羊毛衫/棉服/裙子</td>
+                            <td class="price">20</td>
+                        </tr>      
+                        <tr>
+                            <td>礼服</td>
+                            <td class="price">100</td>
+                        </tr>
+                        <tr>
+                            <td>连衣裙（薄/厚）</td>
+                            <td class="price">60/65</td>
+                        </tr>
+                        <tr>
+                            <td>羽绒服/毛裤</td>
+                            <td class="price">58/68/78</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="price-table-wrapper">
+                    <div class="price-table-title">皮衣皮草类</div>
+                    <table class="price-table">
+                        <tr>
+                            <th>服务项目</th>
+                            <th class="price">价格(元)</th>
+                        </tr>
+                        <tr>
+                            <td>黑色光面皮</td>
+                            <td class="price">200/240/300</td>
+                        </tr>
+                        <tr>
+                            <td>彩色光面皮</td>
+                            <td class="price">220/240/320</td>
+                        </tr>
+                        <tr>   
+                            <td>床品</td>
+                            <td class="price">25-50</td>
+                        </tr>
+                        <tr>
+                            <td>彩色光面皮</td>
+                            <td class="price">240/280/320</td>
+                        </tr>
+                        <tr>
+                            <td>纯色面</td>
+                            <td class="price">240/280/320</td>
+                        </tr>
+                        <tr>
+                            <td>皮革面</td>
+                            <td class="price">240/280/320</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="price-table-wrapper">
+                    <div class="price-table-title">单烫服务</div>
+                    <table class="price-table">
+                        <tr>
+                            <th>服务项目</th>
+                            <th class="price">价格(元)</th>
+                        </tr>
+                        <tr>
+                            <td>T恤衫</td>
+                            <td class="price">18</td>
+                        </tr>
+                        <tr>   
+                            <td>衬衫/T恤/裤子</td>
+                            <td class="price">10</td>
+                        </tr>
+                        <tr>
+                            <td>风衣</td>
+                            <td class="price">30</td>
+                        </tr>
+                        <tr>
+                            <td>羊毛衫/羊毛裤</td>
+                            <td class="price">38</td>
+                        </tr>
+                        <tr>
+                            <td>毛衣外套</td>
+                            <td class="price">35/55/60</td>
+                        </tr>
+                        <tr>
+                            <td>羽绒背心</td>
+                            <td class="price">38</td>
+                        </tr>
+                        <tr>
+                            <td>连衣裙（薄/厚）</td>
+                            <td class="price">25/30</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>      
+ 
+    <section id="repair-prices">
+        <div class="container">
+            <div class="section-title">
+                <h2>缝补价目表</h2>
+                <p>专业缝补服务，精准修复，让您的衣物焕然一新。经验丰富的裁缝师傅，手工精细。</p>
+            </div>
+            
+            <div class="price-tables-container">
+                <div class="price-table-wrapper">
+                    <div class="price-table-title">服装缝补服务</div>
+                    <table class="price-table">
+                        <tr>
+                            <th>服务项目</th>
+                            <th class="price">价格(元)</th>
+                        </tr>
+                        <tr>
+                            <td>剪裤边</td>
+                            <td class="price">15/20/25</td>
+                        </tr>
+                        <tr>
+                            <td>腰围改小</td>
+                            <td class="price">40/45</td>
+                        </tr>
+                        <tr>
+                            <td>腰围改大</td>
+                            <td class="price">45/50</td>
+                        </tr>
+                        <tr>   
+                            <td>裤子换拉链</td>
+                            <td class="price">15/25/30</td>
+                        </tr>
+                        <tr>
+                            <td>换隐形拉链</td>
+                            <td class="price">25/30/60</td>
+                        </tr>
+                        <tr>
+                            <td>衣服改拉链</td>
+                            <td class="price">50/80/120</td>
+                        </tr>
+                        <tr>
+                            <td>衣服剪袖长</td>
+                            <td class="price">20/30/50</td>
+                        </tr>
+                        <tr>
+                            <td>换领子</td>
+                            <td class="price">50/80/120</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="price-table-wrapper">
+                    <div class="price-table-title">服装缝补服务</div>
+                    <table class="price-table">
+                        <tr>
+                            <th>服务项目</th>
+                            <th class="price">价格(元)</th>
+                        </tr>
+                        <tr>
+                            <td>剪衣长</td>
+                            <td class="price">25/55/85</td>
+                        </tr>
+                        <tr>                 
+                            <td>订扣子</td>
+                            <td class="price">2/5/10</td>
+                        </tr>
+                        <tr>
+                            <td>换拉头</td>
+                            <td class="price">10</td>
+                        </tr>
+                        <tr>
+                            <td>衣服改肩宽/胸围/腰围</td>
+                            <td class="price">30/50/80</td>
+                        </tr>
+                        <tr>
+                            <td>裤子改臀围</td>
+                            <td class="price">40/60</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="price-table-wrapper">
+                    <div class="price-table-title">窗帘与订做服务</div>
+                    <table class="price-table">
+                        <tr>
+                            <th>服务项目</th>
+                            <th class="price">价格(元)</th>
+                        </tr>
+                        <tr>
+                            <td>窗帘剪长短</td>
+                            <td class="price">30/50</td>
+                        </tr>
+                        <tr>                   
+                            <td>做窗帘每平方米</td>
+                            <td class="price">45/60</td>
+                        </tr>
+                        <tr>
+                            <td>做窗帘布每平方</td>
+                            <td class="price">80/120</td>
+                        </tr>
+                        <tr>
+                            <td>订做睡衣睡裤</td>
+                            <td class="price">100/200/300</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px; text-align: center; color: var(--text-secondary); padding: 30px; border-radius: 20px; background: var(--primary-bg); box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);">
+                <p>注：以上价格均为参考价，具体价格可能因衣物材质、清洗或缝补难度等因素有所调整</p>
+                <p>会员可享受专属优惠，详情请咨询店内工作人员</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact-info" id="contact">
+        <div class="container">
+            <h2>联系我们</h2>
+            <div class="contact-details">
+                <p>电话: <strong>15821167656</strong></p>
+                <p>地址: 北京市朝阳区干洗路123号UCC国际洗衣</p>
+                <p>营业时间: 周一至周日 8:00-20:00</p>
+            </div>
+            <a href="tel:15821167656" class="btn">立即致电</a>
+        </div>     
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo-icon neumorphism">UCC</div>
+                    <div class="footer-logo-text">
+                        <h3>UCC国际洗衣</h3>
+                        <p>Since 1945</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">首页</a>
+                    <a href="#services">服务项目</a>
+                    <a href="#laundry-prices">干洗价格</a>
+                    <a href="#repair-prices">缝补价格</a>
+                    <a href="#contact">联系我们</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 UCC国际洗衣 版权所有</p>
+                <p>专业洗衣与缝补服务，呵护您的精致生活</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 聊天界面 -->
+    <div class="chat-toggle" id="chatToggle">
+        <i class="fas fa-comments"></i>
+    </div>     
+ 
+    <div class="chat-container chat-hidden" id="chatContainer">
+        <div class="chat-header">
+            <div class="chat-title">UCC客服咨询</div>
+            <button class="chat-close" id="chatClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                您好！欢迎咨询UCC国际洗衣服务。我们提供专业的干洗和缝补服务。请问有什么可以帮助您的？
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="请输入您的问题...">
+            <button id="sendMessage">
+                <i class="fas fa-paper-plane"></i>
+            </button>
         </div>
     </div>
 
     <script>
-        // API服务类
-        class ApiService {
-            constructor() {    
-                this.config = JSON.parse(localStorage.getItem('apiConfig')) || {
-                    provider: 'openai',
-                    apiKey: '',
-                    apiUrl: 'https://api.openai.com/v1',
-                    model: 'gpt-3.5-turbo'
-                };
-            }             
-
-            async getModels() {
-                try {
-                    const response = await fetch(`${this.config.apiUrl}/models`, {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': `Bearer ${this.config.apiKey}`,
-                            'Content-Type': 'application/json'
-                        }
-                    });   
+        // 聊天界面功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatToggle = document.getElementById('chatToggle');
+            const chatContainer = document.getElementById('chatContainer');
+            const chatClose = document.getElementById('chatClose');
+            const chatInput = document.getElementById('chatInput');
+            const sendMessage = document.getElementById('sendMessage');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            // 切换聊天窗口显示/隐藏
+            chatToggle.addEventListener('click', function() {
+                chatContainer.classList.toggle('chat-hidden');
+            });     
+            
+            chatClose.addEventListener('click', function() {
+                chatContainer.classList.add('chat-hidden');
+            });
+            
+            // 发送消息功能
+            function sendUserMessage() {
+                const message = chatInput.value.trim();
+                if (message === '') return;
+                
+                // 添加用户消息
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user-message';
+                userMessage.textContent = message;
+                chatMessages.appendChild(userMessage);
+                
+                // 清空输入框
+                chatInput.value = '';       
+            
+                // 滚动到底部
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // 模拟客服回复
+                setTimeout(function() {
+                    const botMessage = document.createElement('div');
+                    botMessage.className = 'message bot-message';
                     
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(errorData.error?.message || `API请求失败: ${response.status}`);
+                    // 根据用户消息内容提供回复
+                    if (message.includes('价格') || message.includes('多少钱')) {
+                        botMessage.textContent = '我们的干洗和缝补服务价格根据具体项目和衣物材质有所不同，请参考页面上的价目表。如果您有特殊需求，可以致电15821167656咨询。';
+                    } else if (message.includes('时间') || message.includes('多久')) {
+                        botMessage.textContent = '一般干洗服务需要1-2个工作日，缝补服务需要1-3个工作日，具体时间根据衣物情况和难度而定。加急服务可咨询店内工作人员。';
+                    } else if (message.includes('地址') || message.includes('在哪里')) {
+                        botMessage.textContent = '我们的地址是：北京市朝阳区干洗路123号UCC国际洗衣。营业时间：周一至周日 8:00-20:00。';
+                    } else if (message.includes('缝补') || message.includes('修补')) {
+                        botMessage.textContent = '我们提供专业的缝补服务，包括剪裤边、换拉链、改尺寸等。具体价格请查看缝补价目表部分。';
+                    } else if (message.includes('干洗') || message.includes('清洗')) {
+                        botMessage.textContent = '我们提供各类衣物的专业干洗服务，包括西装、礼服、外套、羽绒服等。具体价格请查看干洗价目表部分。';
+                    } else {
+                        botMessage.textContent = '感谢您的咨询！如需了解更多详情，请致电15821167656，我们的客服人员会为您详细解答。';
                     }
                     
-                    const data = await response.json();
-                    return data.data.map(model => model.id);
-                } catch (error) {
-                    console.error('获取模型列表失败:', error);
-                    throw error;
-                }
-            }      
-
-            async chatWithRole(rolePrompt, userMessage, temperature = 0.7) {
-                if (!this.config.apiKey) {
-                    throw new Error('API密钥未配置');
-                }
-
-                const messages = [
-                    { role: 'system', content: rolePrompt },
-                    { role: 'user', content: userMessage }
-                ];
-
-                try {
-                    const response = await fetch(`${this.config.apiUrl}/chat/completions`, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${this.config.apiKey}`,
-                            'Content-Type': 'application/json'
-                        },     
-                        body: JSON.stringify({
-                            model: this.config.model,
-                            messages: messages,
-                            temperature: temperature
-                        })
-                    });
-
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(`API请求失败: ${errorData.error?.message || response.status}`);
-                    }
-
-                    const data = await response.json();
-                    return data.choices[0].message.content;
-                } catch (error) {
-                    console.error('API调用失败:', error);
-                    throw error;
-                }
-            }
-
-            async testConnection() {
-                try {
-                    const models = await this.getModels();
-                    return { success: true, models: models };
-                } catch (error) {
-                    return { success: false, error: error.message };
-                }
-            }
-        }              
-
-        // 应用主逻辑
-        const apiService = new ApiService();
-        let roles = JSON.parse(localStorage.getItem('roles')) || [];
-        let currentRoleId = null;
-        let editingRoleId = null;
-        let messages = []; // 存储所有消息
-
-        // 页面切换逻辑
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                
-                const pageId = tab.getAttribute('data-page');
-                document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-                document.getElementById(pageId).classList.add('active');
-            });
-        });    
-
-        // 角色管理功能
-        function renderRoles() {
-            const roleList = document.getElementById('role-list');
-            roleList.innerHTML = '';
-            
-            if (roles.length === 0) {
-                roleList.innerHTML = '<p style="color: #666; text-align: center; padding: 40px 0;">暂无角色，点击"新建角色"开始创建</p>';
-                return;
+                    chatMessages.appendChild(botMessage);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000);
             }
             
-            roles.forEach(role => {
-                const roleCard = document.createElement('div');
-                roleCard.className = 'role-card';
-                roleCard.innerHTML = `
-                    <h3>${role.name}</h3>
-                    <p>${role.description || '暂无描述'}</p>
-                    <div class="role-actions">
-                        <button class="btn btn-primary use-role" data-id="${role.id}">使用</button>
-                        <button class="btn btn-secondary edit-role" data-id="${role.id}">编辑</button>
-                        <button class="btn btn-secondary delete-role" data-id="${role.id}">删除</button>
-                    </div>
-                `;
-                roleList.appendChild(roleCard);
+            sendMessage.addEventListener('click', sendUserMessage);
+ 
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendUserMessage();
+                }
             });
             
-            // 绑定角色按钮事件
-            document.querySelectorAll('.use-role').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const roleId = btn.getAttribute('data-id');
-                    selectRole(roleId);
-                    document.querySelector('.tab[data-page="chat-page"]').click();
-                });
-            });
-            
-            document.querySelectorAll('.edit-role').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const roleId = btn.getAttribute('data-id');
-                    editRole(roleId);
-                });
-            });
-            
-            document.querySelectorAll('.delete-role').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const roleId = btn.getAttribute('data-id');
-                    deleteRole(roleId);
-                });
-            });
-        }
-
-        function selectRole(roleId) {
-            const role = roles.find(r => r.id === roleId);
-            if (role) {
-                currentRoleId = roleId;
-                document.getElementById('current-role').textContent = role.name;
-                messages = []; // 清空消息历史
-                renderMessages();
-            }
-        }
-
-        function editRole(roleId) {
-            const role = roles.find(r => r.id === roleId);
-            if (role) {
-                editingRoleId = roleId;
-                document.getElementById('form-title').textContent = '编辑角色';
-                document.getElementById('role-name').value = role.name;
-                document.getElementById('role-description').value = role.description || '';
-                document.getElementById('role-prompt').value = role.prompt || '';
-                document.getElementById('role-form').style.display = 'block';
-                document.getElementById('role-form').scrollIntoView({ behavior: 'smooth' });
-            }
-        }   
-
-        function deleteRole(roleId) {
-            if (confirm('确定要删除这个角色吗？')) {
-                roles = roles.filter(r => r.id !== roleId);
-                saveRoles();
-                renderRoles();
-                if (currentRoleId === roleId) {
-                    currentRoleId = null;
-                    document.getElementById('current-role').textContent = '未选择角色';
-                }
-            }
-        } 
-
-        function saveRole() {
-            const name = document.getElementById('role-name').value.trim();
-            const description = document.getElementById('role-description').value.trim();
-            const prompt = document.getElementById('role-prompt').value.trim();
-            
-            if (!name) {
-                alert('请输入角色名称');
-                return;
-            }                            
-            
-            if (editingRoleId) {
-                const role = roles.find(r => r.id === editingRoleId);
-                if (role) {
-                    role.name = name;
-                    role.description = description;
-                    role.prompt = prompt;
-                }
-            } else {
-                const newRole = {
-                    id: Date.now().toString(),
-                    name,
-                    description,
-                    prompt,
-                    createdAt: new Date().toISOString()
-                };
-                roles.push(newRole);
-            }
-            
-            saveRoles();
-            renderRoles();
-            resetRoleForm();
-        }
-                                                                                            
-        function resetRoleForm() {
-            editingRoleId = null;
-            document.getElementById('form-title').textContent = '新建角色';
-            document.getElementById('role-name').value = '';
-            document.getElementById('role-description').value = '';
-            document.getElementById('role-prompt').value = '';
-            document.getElementById('role-form').style.display = 'none';
-        }
-
-        function saveRoles() {
-            localStorage.setItem('roles', JSON.stringify(roles));
-        }
-
-        // API配置功能
-        function initApiForm() {
-            const config = apiService.config;
-            document.getElementById('api-provider').value = config.provider;
-            document.getElementById('api-key').value = config.apiKey;
-            document.getElementById('api-url').value = config.apiUrl;
-            
-            const modelSelect = document.getElementById('model-select');
-            if (config.model) {
-                const option = document.createElement('option');
-                option.value = config.model;
-                option.textContent = config.model;
-                modelSelect.innerHTML = '';
-                modelSelect.appendChild(option);
-            }
-        }
-
-        function showAlert(message, type = 'success') {
-            const alertDiv = document.getElementById('api-alert');
-            alertDiv.textContent = message;
-            alertDiv.className = `alert alert-${type}`;
-            alertDiv.style.display = 'block';
-            
-            setTimeout(() => {
-                alertDiv.style.display = 'none';
-            }, 5000);
-        }
-
-        async function refreshModels() {
-            try {
-                const modelSelect = document.getElementById('model-select');
-                modelSelect.innerHTML = '<option value="">加载中...</option>';
-                
-                const { success, models, error } = await apiService.testConnection();
-                
-                if (success) {
-                    modelSelect.innerHTML = '';
-                    models.forEach(model => {
-                        const option = document.createElement('option');
-                        option.value = model;
-                        option.textContent = model;
-                        modelSelect.appendChild(option);
-                    });
-                    
-                    if (apiService.config.model) {
-                        modelSelect.value = apiService.config.model;
-                    }
-                    
-                    showAlert(`成功获取 ${models.length} 个模型`, 'success');
-                } else {
-                    modelSelect.innerHTML = '<option value="">获取失败</option>';
-                    throw new Error(error);
-                }
-            } catch (error) {
-                showAlert(`刷新模型失败: ${error.message}`, 'error');
-            }   
-        }
-
-        async function testApiConnection() {
-            try {
-                const testBtn = document.getElementById('test-api');
-                const originalText = testBtn.textContent;
-                testBtn.textContent = '测试中...';
-                testBtn.disabled = true;
-                
-                const { success, error } = await apiService.testConnection();
-                
-                testBtn.textContent = originalText;
-                testBtn.disabled = false;
-                
-                if (success) {
-                    showAlert('API连接测试成功！', 'success');
-                } else {
-                    throw new Error(error);
-                }  
-            } catch (error) {
-                let errorMessage = `连接失败: ${error.message}\n\n可能原因:\n`;
-                
-                if (error.message.includes('Failed to fetch')) {
-                    errorMessage += '1. API地址不正确或服务器不可达\n';
-                    errorMessage += '2. 网络连接问题或防火墙限制\n';
-                    errorMessage += '3. 跨域问题(CORS)，尝试使用代理\n';
-                } else if (error.message.includes('401')) {
-                    errorMessage += '1. API密钥不正确或已过期\n';
-                    errorMessage += '2. 密钥格式错误\n';
-                } else if (error.message.includes('404')) {
-                    errorMessage += '1. API端点路径不正确\n';
-                    errorMessage += '2. 服务未部署在该路径\n';
-                } else if (error.message.includes('429')) {
-                    errorMessage += '1. API调用频率超限\n';
-                    errorMessage += '2. 账户配额已用完\n';
-                } else {       
-                    errorMessage += '1. 服务器内部错误\n';
-                    errorMessage += '2. 请求格式不正确\n';
-                }
-                
-                showAlert(errorMessage, 'error');
-            }
-        }
-
-        function saveApiConfig() {
-            apiService.config = {
-                provider: document.getElementById('api-provider').value,
-                apiKey: document.getElementById('api-key').value,
-                apiUrl: document.getElementById('api-url').value.trim(),
-                model: document.getElementById('model-select').value
-            };
-            localStorage.setItem('apiConfig', JSON.stringify(apiService.config));
-            showAlert('API配置已保存', 'success');
-        }  
-
-        // 聊天功能 - 新增消息编辑和删除功能
-        function renderMessages() {
-            const messagesContainer = document.getElementById('chat-messages');
-            messagesContainer.innerHTML = '';
-            
-            messages.forEach((message, index) => {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `message ${message.sender}-message`;
-                messageDiv.setAttribute('data-index', index);
-                
-                if (message.isEditing) {
-                    // 编辑模式
-                    messageDiv.innerHTML = `
-                        <textarea class="edit-message-input">${message.content}</textarea>
-                        <div class="edit-actions">
-                            <button class="btn btn-secondary save-edit">保存</button>
-                            <button class="btn btn-secondary cancel-edit">取消</button>
-                        </div>
-                    `;  
-                } else {
-                    // 显示模式
-                    messageDiv.innerHTML = `
-                        <div class="message-content">${message.content}</div>
-                        <div class="message-actions">
-                            <button class="message-action edit-btn">编辑</button>
-                            <button class="message-action delete-btn">删除</button>
-                        </div>
-                    `;
-                }  
-                
-                messagesContainer.appendChild(messageDiv);
-                
-                // 绑定编辑和删除事件
-                if (!message.isEditing) {
-                    const editBtn = messageDiv.querySelector('.edit-btn');
-                    const deleteBtn = messageDiv.querySelector('.delete-btn');
-                    
-                    editBtn.addEventListener('click', () => {
-                        enterEditMode(index);
-                    });
-                    
-                    deleteBtn.addEventListener('click', () => {
-                        deleteMessage(index);
-                    });     
-                } else {
-                    const saveBtn = messageDiv.querySelector('.save-edit');
-                    const cancelBtn = messageDiv.querySelector('.cancel-edit');
-                    
-                    saveBtn.addEventListener('click', () => {
-                        saveEdit(index, messageDiv.querySelector('.edit-message-input').value);
-                    });
-                    
-                    cancelBtn.addEventListener('click', () => {
-                        cancelEdit(index);
-                    });
-                }
-            });    
-            
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function enterEditMode(index) {
-            messages[index].isEditing = true;
-            renderMessages();
-        } 
-
-        function saveEdit(index, newContent) {
-            if (newContent.trim()) {
-                messages[index].content = newContent.trim();
-                messages[index].isEditing = false;
-                renderMessages();
-            }
-        }
-
-        function cancelEdit(index) {
-            messages[index].isEditing = false;
-            renderMessages();
-        }   
-
-        function deleteMessage(index) {
-            messages.splice(index, 1);
-            renderMessages();
-        }
-
-        async function sendMessage() {
-            const input = document.getElementById('user-input');
-            const message = input.value.trim();
-            
-            if (!message) return;
-            
-            if (!currentRoleId) {
-                alert('请先选择一个角色');
-                return;
-            }
-            
-            // 添加用户消息
-            messages.push({
-                content: message,
-                sender: 'user',
-                timestamp: new Date().toISOString(),
-                isEditing: false
-            });      
-            
-            renderMessages();
-            input.value = '';
-            
-            try {
-                const role = roles.find(r => r.id === currentRoleId);
-                
-                // 显示加载状态
-                const loadingId = messages.length;
-                messages.push({
-                    content: '思考中...',
-                    sender: 'bot',
-                    timestamp: new Date().toISOString(),
-                    isEditing: false,
-                    isLoading: true
-                });     
-                renderMessages();
-                
-                // 调用API获取回复
-                const botReply = await apiService.chatWithRole(role.prompt, message);
-                
-                // 移除加载状态，添加实际回复
-                messages.pop(); // 移除加载消息
-                messages.push({
-                    content: botReply,
-                    sender: 'bot',
-                    timestamp: new Date().toISOString(),
-                    isEditing: false
-                }); 
-                
-                renderMessages();
-            } catch (error) {
-                console.error('聊天出错:', error);
-                // 移除加载消息
-                if (messages.length > 0 && messages[messages.length-1].isLoading) {
-                    messages.pop();
-                }
-                // 添加错误消息
-                messages.push({
-                    content: `出错: ${error.message}`,
-                    sender: 'bot',
-                    timestamp: new Date().toISOString(),
-                    isEditing: false
-                });
-                renderMessages();
-            }
-        } 
-
-        // 初始化事件监听
-        document.addEventListener('DOMContentLoaded', () => {
-            renderRoles();
-            initApiForm();
-            
-            document.getElementById('add-role-btn').addEventListener('click', () => {
-                document.querySelector('.tab[data-page="roles-page"]').click();
-                document.getElementById('new-role-btn').click();
-            });            
-            
-            document.getElementById('new-role-btn').addEventListener('click', () => {
-                resetRoleForm();
-                document.getElementById('role-form').style.display = 'block';
-                document.getElementById('role-form').scrollIntoView({ behavior: 'smooth' });
-            });
-            
-            document.getElementById('cancel-role').addEventListener('click', resetRoleForm);
-            document.getElementById('save-role').addEventListener('click', saveRole);
-            
-            document.getElementById('save-api').addEventListener('click', saveApiConfig);
-            document.getElementById('test-api').addEventListener('click', testApiConnection);
-            document.getElementById('refresh-models').addEventListener('click', refreshModels);
-            
-            document.getElementById('send-btn').addEventListener('click', sendMessage);
-            document.getElementById('user-input').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
+            // 平滑滚动到锚点
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    sendMessage();
-                }
-            });   
-            
-            // 自动调整输入框高度
-            const textarea = document.getElementById('user-input');
-            textarea.addEventListener('input', function() {
-                this.style.height = 'auto';
-                this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }     
+                });
             });
         });
     </script>
 </body>
-</html>                                                                                                                                                                                                                                                                                                                                                                                                                                               
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
